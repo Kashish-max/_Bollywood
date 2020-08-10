@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;515;600;700&display=swap');
+/******keyboard*******/
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.bollywood-title {
+    font-family: 'Quicksand';
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.bollywood-title h1 {
+    font-size: 5rem;
+}
+
+.display-question {
+    height: 200px;
+}
+
+ul .keyboard {
+    list-style-type: none;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0;
+    width: 100%;
+    height: 50%;
+}
+
+.keyboard li {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    /** margin: auto; **/
+    line-height: 50px;
+    padding: 0;
+    margin: 0.3% 0.6% 0.6% 0.2%;
+    background-color: #ddd;
+    color: black;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 1vw;
+    user-select: none;
+}
+
+.char {
+    width: 5.75%;
+    transition: background-color 100ms;
+}
+
+/* .keyboard .touch {
+    background-color: #CA4200;
+} */
