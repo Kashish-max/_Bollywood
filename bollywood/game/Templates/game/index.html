@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
     <!-- Custom CSS-->
-    <link rel="stylesheet" type="text/css" href={% static 'game/style.css' %}> 
+    <link rel="stylesheet" type="text/css" href={% static 'game/css/style.css' %}> 
+
 
     <title>Bollywood</title>
   </head>
@@ -20,7 +21,9 @@
             <div class="bollywood-title">
                 <h1>BOLLYWOOD</h1>
             </div>
-            <div class="display-question">
+            <div id="displayQuestion" class="test">
+
+                <h2>Movie Name</h2>
                 
             </div>
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -44,5 +47,7 @@
             </div>
         </div>
     </section>
+    <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>
+
 </body>
 </html>
