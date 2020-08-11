@@ -21,25 +21,23 @@
             <div class="bollywood-title">
                 <h1>BOLLYWOOD</h1>
             </div>
-            <div id="displayQuestion" class="test">
-
-                <h2>Movie Name</h2>
-                
+            <div class="displayMovie">
+                <h2 id="displayQuestion"></h2>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div id="virtualkeyboard">
                     <div class="panel-body">
                         <ul class="keyboard">         
                             {% for button in upper_layer %}
-                            <li class="char">{{ button }}</li>
+                            <li class="char"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
                             {% endfor %}
 
                             {% for button in middle_layer %}
-                            <li class="char">{{ button }}</li>
+                            <li class="char"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
                             {% endfor %}
 
                             {% for button in bottom_layer %}
-                            <li class="char">{{ button }}</li>
+                            <li class="char"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
                             {% endfor %}
                         </ul>
                     </div>
