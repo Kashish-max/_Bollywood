@@ -19,14 +19,25 @@
     <section>
         <div class="container">
             <div class="bollywood-title">
-                <h1>BOLLYWOOD</h1>
+                <h1><span id="1">B</span>
+                    <span id="2">O</span>
+                    <span id="3">L</span>
+                    <span id="4">L</span>
+                    <span id="5">Y</span>
+                    <span id="6">W</span>
+                    <span id="7">O</span>
+                    <span id="8">O</span>
+                    <span id="9">D</span>
+                </h1>
             </div>
             <div class="displayMovie">
                 <h2 id="displayQuestion"></h2>
             </div>
+            <div id="app"></div>
+            <button onclick="startTimer()">Click me</button>
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div id="virtualkeyboard">
-                    <div class="panel-body">
+                    <div class="panel-body" >
                         <ul class="keyboard">         
                             {% for button in upper_layer %}
                             <li class="char"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
