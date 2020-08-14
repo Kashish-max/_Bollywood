@@ -8,7 +8,7 @@ var movieFromBackend = "Avengers Endgame";
 
 var movieName = "";
 
-var count=0;
+var count = 0;
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -29,6 +29,13 @@ function chooseMode() {
 function playGame(el) {
   document.getElementById("gameMode").style.display = "none";
   document.getElementById("displayGame").style.display = "block";
+  if (el === "normal") {
+    document.getElementById("app").style.display = "none";
+  } else if (el === "endless") {
+    //Logic for endless
+  } else {
+    //Logic for Multiplayer
+  }
   checkLetter();
   document.getElementById("displayQuestion").innerHTML = movieName;
 }
@@ -50,7 +57,6 @@ function checkLetter() {
 
 var testMovie;
 function testFunction(el) {
- 
   if (movieFromBackend.indexOf(el) !== -1) {
     for (var i = 0; i < movieFromBackend.length; i++) {
       if (movieFromBackend[i] === el) {
@@ -59,21 +65,43 @@ function testFunction(el) {
       }
     }
   } else {
-    count+=1;
-      switch ( count )
-      {
-        case 1: document.getElementById("1").style.textDecoration = "line-through";break;
-        case 2: document.getElementById("2").style.textDecoration = "line-through";break;
-        case 3: document.getElementById("3").style.textDecoration = "line-through";break;
-        case 4: document.getElementById("4").style.textDecoration = "line-through";break;
-        case 5: document.getElementById("5").style.textDecoration = "line-through";break;
-        case 6: document.getElementById("6").style.textDecoration = "line-through";break;
-        case 7: document.getElementById("7").style.textDecoration = "line-through";break;
-        case 8: document.getElementById("8").style.textDecoration = "line-through";break;
-        case 9: document.getElementById("9").style.textDecoration = "line-through";break;
-      }
+    let isOver = false;
+    count += 1;
+    switch (count) {
+      case 1:
+        document.getElementById("1").style.textDecoration = "line-through";
+        break;
+      case 2:
+        document.getElementById("2").style.textDecoration = "line-through";
+        break;
+      case 3:
+        document.getElementById("3").style.textDecoration = "line-through";
+        break;
+      case 4:
+        document.getElementById("4").style.textDecoration = "line-through";
+        break;
+      case 5:
+        document.getElementById("5").style.textDecoration = "line-through";
+        break;
+      case 6:
+        document.getElementById("6").style.textDecoration = "line-through";
+        break;
+      case 7:
+        document.getElementById("7").style.textDecoration = "line-through";
+        break;
+      case 8:
+        document.getElementById("8").style.textDecoration = "line-through";
+        break;
+      case 9:
+        document.getElementById("9").style.textDecoration = "line-through";
+        isOver = true;
+        break;
+    }
+    if (isOver === true) {
+      alert("You loose!!!");
+    }
   }
-
+  document.getElementById(el).style.visibility = "hidden";
   document.getElementById("displayQuestion").innerHTML = movieName;
 }
 
@@ -85,16 +113,16 @@ const ALERT_THRESHOLD = 45;
 
 const COLOR_CODES = {
   info: {
-    color: "green"
+    color: "green",
   },
   warning: {
     color: "orange",
-    threshold: WARNING_THRESHOLD
+    threshold: WARNING_THRESHOLD,
   },
   alert: {
     color: "red",
-    threshold: ALERT_THRESHOLD
-  }
+    threshold: ALERT_THRESHOLD,
+  },
 };
 
 const TIME_LIMIT = 180;
@@ -126,8 +154,6 @@ document.getElementById("app").innerHTML = `
   )}</span>
 </div>
 `;
-
-
 
 function onTimesUp() {
   clearInterval(timerInterval);
@@ -193,6 +219,4 @@ function setCircleDasharray() {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 
-
 //-------------------------------------FADE OUT-----------------------------------------------
-
