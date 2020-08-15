@@ -64,6 +64,17 @@
                     </div>
                 </div>
             </div>
+            <div id="gameWon" class="play game-mode" >
+                <h1>YOU WON!!</h1>
+            </br>
+                <button onclick="playAgain()">Play Again?</button>
+            </div>
+            <div id="gameLost" class="play game-mode">
+                <button onclick="playAgain()">Play Again?</button>
+                <h1>YOU LOSE!!</h1>
+                <h1>The Movie Name is <span id="mname"></span></h1>
+               
+            </div>
         </div>
     </section>
     <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>
