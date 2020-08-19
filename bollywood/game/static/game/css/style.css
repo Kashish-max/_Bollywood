@@ -9,6 +9,7 @@ html {
 body {
   overflow-x: hidden;
   font-family: 'Play', sans-serif;
+  color: #fff;
 }
 
 * {
@@ -144,6 +145,7 @@ ul {
 
 .bollywood-title h1 {
   font-size: 5rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .displayMovie {
@@ -155,9 +157,8 @@ ul {
   font-size: 3rem;
 }
 
-ul .keyboard {
+.keyboard {
   list-style-type: none;
-  background-color: #fff;
   border-radius: 5px;
   padding: 0;
   width: 100%;
@@ -171,14 +172,16 @@ ul .keyboard {
   /** margin: auto; **/
   line-height: 50px;
   padding: 0;
-  margin: 0.3% 0.6% 0.6% 0.2%;
+  margin: 0.3rem 0.6rem 0.6rem 0.2rem;
   background-color: #ddd;
   color: black;
   vertical-align: middle;
   text-align: center;
   border-radius: 4px;
-  font-size: 1vw;
+  font-size: 1.0vw;
   user-select: none;
+  width: 5.75%;
+  transition: background-color 100ms;
 }
 
 .keyboard li button {
@@ -194,11 +197,6 @@ ul .keyboard {
 .keyboard li button:hover {
   background-color: #bbb;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.03), 0 10px 10px rgba(0, 0, 0, 0.03);
-}
-
-.char {
-  width: 5.75%;
-  transition: background-color 100ms;
 }
 
 .timer-area {

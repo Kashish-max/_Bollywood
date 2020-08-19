@@ -38,15 +38,15 @@
             </div>
             <div id="displayGame">
                 <div class="bollywood-title">
-                  <h1><span id="1">B</span>
-                    <span id="2">O</span>
-                    <span id="3">L</span>
-                    <span id="4">L</span>
-                    <span id="5">Y</span>
-                    <span id="6">W</span>
-                    <span id="7">O</span>
-                    <span id="8">O</span>
-                    <span id="9">D</span>
+                  <h1><span id="11">B</span>
+                    <span id="12">O</span>
+                    <span id="13">L</span>
+                    <span id="14">L</span>
+                    <span id="15">Y</span>
+                    <span id="16">W</span>
+                    <span id="17">O</span>
+                    <span id="18">O</span>
+                    <span id="19">D</span>
                   </h1>                
                 </div>
                 <div class="displayMovie">
@@ -58,16 +58,8 @@
                     <div id="virtualkeyboard">
                         <div class="panel-body">
                             <ul class="keyboard">         
-                                {% for button in upper_layer %}
-                                <li class="char" id="{{ button }}"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
-                                {% endfor %}
-
-                                {% for button in middle_layer %}
-                                <li class="char" id="{{ button }}"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
-                                {% endfor %}
-
-                                {% for button in bottom_layer %}
-                                <li class="char" id="{{ button }}"><button onclick="testFunction('{{ button }}')">{{ button }}</button></li>
+                                {% for letter in keyboard %}
+                                <li class="char" id="{{ letter }}"><button onclick="testFunction('{{ letter }}')">{{ letter }}</button></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -87,6 +79,7 @@
             </div>
         </div>
     </section>
+    {% comment %} <script rel="stylesheet" type="text/javascript">console.log("{{ random_movie }}")</script> {% endcomment %}
     <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>
     
 </body>

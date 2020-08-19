@@ -1,16 +1,10 @@
 var vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
-
-upper_layer = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
-middle_layer = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
-bottom_layer = ["z", "x", "c", "v", "b", "n", "m"];
-
 var movieFromBackend = "Avengers";
-
 var movieName = "";
-
 var count = 0;
-
-var sndbtn = new Audio("https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg");
+var sndbtn = new Audio(
+  "https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"
+);
 
 var sndchs = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
 
@@ -29,14 +23,14 @@ document.getElementById("gameLost").style.display = "none";
 
 function chooseMode() {
   sndchs.play();
-  sndchs.currentTime=0;
+  sndchs.currentTime = 0;
   document.getElementById("displayPlay").style.display = "none";
   document.getElementById("gameMode").style.display = "block";
 }
 
 function playGame(el) {
   sndchs.play();
-  sndchs.currentTime=0;
+  sndchs.currentTime = 0;
   document.getElementById("gameMode").style.display = "none";
   document.getElementById("displayGame").style.display = "block";
   if (el === "normal") {
@@ -65,17 +59,17 @@ function checkLetter() {
   }
 }
 
-function gameComplete(){
-  if (count === 9) // if game is lost
-  { 
-    document.getElementById("mname").innerHTML=movieFromBackend;
+function gameComplete() {
+  if (count === 9) {
+    // if game is lost
+    document.getElementById("mname").innerHTML = movieFromBackend;
     document.getElementById("gameLost").style.display = "block";
     document.getElementById("displayGame").style.display = "none";
     document.getElementById("gameMode").style.display = "none";
     document.getElementById("displayPlay").style.display = "none";
   }
-  if(movieName.indexOf('_') === -1)  // if game is won
-  {
+  if (movieName.indexOf("_") === -1) {
+    // if game is won
     document.getElementById("gameWon").style.display = "block";
     document.getElementById("displayGame").style.display = "none";
     document.getElementById("gameMode").style.display = "none";
@@ -84,9 +78,10 @@ function gameComplete(){
 }
 
 var testMovie;
+var hiddenAlpha = [];
 function testFunction(el) {
   sndbtn.play();
- sndbtn.currentTime=0;
+  sndbtn.currentTime = 0;
   if (movieFromBackend.indexOf(el) !== -1) {
     for (var i = 0; i < movieFromBackend.length; i++) {
       if (movieFromBackend[i] === el) {
@@ -98,45 +93,48 @@ function testFunction(el) {
     count += 1;
     switch (count) {
       case 1:
-        document.getElementById("1").style.textDecoration = "line-through";
+        document.getElementById("11").style.textDecoration = "line-through";
         break;
       case 2:
-        document.getElementById("2").style.textDecoration = "line-through";
+        document.getElementById("12").style.textDecoration = "line-through";
         break;
       case 3:
-        document.getElementById("3").style.textDecoration = "line-through";
+        document.getElementById("13").style.textDecoration = "line-through";
         break;
       case 4:
-        document.getElementById("4").style.textDecoration = "line-through";
+        document.getElementById("14").style.textDecoration = "line-through";
         break;
       case 5:
-        document.getElementById("5").style.textDecoration = "line-through";
+        document.getElementById("15").style.textDecoration = "line-through";
         break;
       case 6:
-        document.getElementById("6").style.textDecoration = "line-through";
+        document.getElementById("16").style.textDecoration = "line-through";
         break;
       case 7:
-        document.getElementById("7").style.textDecoration = "line-through";
+        document.getElementById("17").style.textDecoration = "line-through";
         break;
       case 8:
-        document.getElementById("8").style.textDecoration = "line-through";
+        document.getElementById("18").style.textDecoration = "line-through";
         break;
       case 9:
-        document.getElementById("9").style.textDecoration = "line-through";
+        document.getElementById("19").style.textDecoration = "line-through";
         break;
     }
   }
   document.getElementById(el).style.visibility = "hidden";
+  hiddenAlpha.push(el);
   document.getElementById("displayQuestion").innerHTML = movieName;
   gameComplete();
 }
 
-function playAgain(obj){
-  movieName="";
-  console.log(obj);
+function playAgain() {
+  hiddenAlpha.forEach(function (el) {
+    document.getElementById(el).style.visibility = "visible";
+  });
+  hiddenAlpha = [];
+  movieName = "";
   chooseMode();
 }
-
 
 // -------------------------------------------------FOR TIMER----------------------------------------------------------------------
 
