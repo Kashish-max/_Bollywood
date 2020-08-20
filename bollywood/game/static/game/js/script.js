@@ -1,5 +1,4 @@
 var vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
-var movieFromBackend = "Avengers";
 var movieName = "";
 var count = 0;
 var sndbtn = new Audio(

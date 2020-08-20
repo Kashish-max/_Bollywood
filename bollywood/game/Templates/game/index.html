@@ -82,7 +82,10 @@
             </div>
         </div>
     </section>
-    {% comment %} <script rel="stylesheet" type="text/javascript">console.log("{{ random_movie }}")</script> {% endcomment %}
+    <script rel="stylesheet" type="text/javascript">
+        console.log("{{ random_movie }}");
+        var movieFromBackend = "{{ random_movie }}";
+    </script>
     <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>
     
 </body>
