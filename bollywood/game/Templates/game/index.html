@@ -38,7 +38,8 @@
             </div>
             <div id="displayGame">
                 <div class="bollywood-title">
-                  <h1><span id="11">B</span>
+                  <h1>
+                    <span id="11">B</span>
                     <span id="12">O</span>
                     <span id="13">L</span>
                     <span id="14">L</span>
@@ -66,16 +67,18 @@
                     </div>
                 </div>
             </div>
-            <div id="gameWon" class="play game-mode" >
-                <h1>YOU WON!!</h1>
-            </br>
-                <button onclick="playAgain()">Play Again?</button>
-            </div>
-            <div id="gameLost" class="play game-mode">
-                <button onclick="playAgain()">Play Again?</button>
-                <h1>YOU LOSE!!</h1>
-                <h1>The Movie Name is <span id="mname"></span></h1>
-               
+            <div id="displayResult">
+                <div id="gameWon" class="play game-mode" >
+                    <h1>YOU WON!!</h1>
+                </br>
+                    <button onclick="playAgain()">Play Again?</button>
+                </div>
+                <div id="gameLost" class="play game-mode">
+                    <button onclick="playAgain()">Play Again?</button>
+                    <h1>YOU LOSE!!</h1>
+                    <h1>The Movie Name is <span id="movieName"></span></h1>
+                
+                </div>
             </div>
         </div>
     </section>

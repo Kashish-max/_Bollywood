@@ -62,11 +62,15 @@ function checkLetter() {
 function gameComplete() {
   if (count === 9) {
     // if game is lost
-    document.getElementById("mname").innerHTML = movieFromBackend;
+    document.getElementById("movieName").innerHTML = movieFromBackend;
     document.getElementById("gameLost").style.display = "block";
     document.getElementById("displayGame").style.display = "none";
     document.getElementById("gameMode").style.display = "none";
     document.getElementById("displayPlay").style.display = "none";
+    for (var i = 11; i < 20; i++) {
+      document.getElementById(String(i)).style.textDecoration = "none";
+    }
+    count = 0;
   }
   if (movieName.indexOf("_") === -1) {
     // if game is won
@@ -74,6 +78,10 @@ function gameComplete() {
     document.getElementById("displayGame").style.display = "none";
     document.getElementById("gameMode").style.display = "none";
     document.getElementById("displayPlay").style.display = "none";
+    for (var i = 11; i < 20; i++) {
+      document.getElementById(String(i)).style.textDecoration = "none";
+    }
+    count = 0;
   }
 }
 
@@ -128,6 +136,8 @@ function testFunction(el) {
 }
 
 function playAgain() {
+  document.getElementById("gameLost").style.display = "none";
+  document.getElementById("gameWon").style.display = "none";
   hiddenAlpha.forEach(function (el) {
     document.getElementById(el).style.visibility = "visible";
   });
