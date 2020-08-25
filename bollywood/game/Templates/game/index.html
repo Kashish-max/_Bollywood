@@ -11,12 +11,23 @@
     <!-- Custom CSS-->
     <link rel="stylesheet" type="text/css" href={% static 'game/css/style.css' %}> 
 
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <title>Bollywood</title>
   </head>
 
-<body>
+<body>            
+
     <section class="main-section">
+        {% comment %} Type {% endcomment %}
+        <div class="type-area" id="typeWriter">
+            <h1>
+            <span id="spantypeWriter" class="txt-type" data-wait="3000" data-words='["One Stop destination for movie lovers", "Guess the guess out of movie name"]'></span>
+            </h1>
+            <h2>Welcome To BTown!</h2>
+        </div>
+        {% comment %} Type_end {% endcomment %}
+
         <div class="animation-area">
             <ul class="box-area">
                 <li></li>
@@ -27,6 +38,7 @@
                 <li></li>
             </ul>
         </div>
+
         <div class="container" id="displaySection">
             <div class="play start-game" id="displayPlay">
                 <button onclick="chooseMode()">Play</button>
@@ -54,7 +66,6 @@
                     <h2 id="displayQuestion"></h2>
                 </div>
                 <div id="app" class="timer-area"></div>
-                {% comment %} <button onclick="startTimer()">Click me</button> {% endcomment %}
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div id="virtualkeyboard">
                         <div class="panel-body">
@@ -71,10 +82,11 @@
                 <div id="gameWon" class="play game-mode" >
                     <h1>YOU WON!!</h1>
                 </br>
-                    <button onclick="playAgain()">Play Again?</button>
+                    <button class="genrateMovie" onclick="playAgain()" >Play Again?</button>
+                    {% comment %} <a class="genrateMovie" href="#">Play Again?</a> {% endcomment %}
                 </div>
                 <div id="gameLost" class="play game-mode">
-                    <button onclick="playAgain()">Play Again?</button>
+                    <button class="genrateMovie" onclick="playAgain()">Play Again?</button>
                     <h1>YOU LOSE!!</h1>
                     <h1>The Movie Name is <span id="movieName"></span></h1>
                 
@@ -82,11 +94,28 @@
             </div>
         </div>
     </section>
-    <script rel="stylesheet" type="text/javascript">
-        console.log("{{ random_movie }}");
-        var movieFromBackend = "{{ random_movie }}";
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('.genrateMovie').click(function(){
+        $.ajax(
+        {
+            type:"GET",
+            url: "/regen_movie",
+            data:{
+            },
+            dataType: 'json',
+            success: function( data ) 
+            {
+                console.log(data.question_text)
+                movieFromBackend = data.question_text;
+            }
+        })
+    });
     </script>
-    <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>
-    
+    <script rel="stylesheet" type="text/javascript">
+            console.log("{{ random_movie }}");
+            var movieFromBackend = "{{ random_movie }}";
+    </script>
+    <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>  
 </body>
 </html>
