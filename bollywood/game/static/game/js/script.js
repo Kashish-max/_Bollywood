@@ -1,4 +1,5 @@
 var vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
+var keyboard = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z",];
 var movieName = "";
 var count = 0;
 var sndbtn = new Audio(
@@ -15,25 +16,59 @@ String.prototype.replaceAt = function (index, replacement) {
   );
 };
 
-document.getElementById("displayGame").style.display = "none";
-document.getElementById("gameMode").style.display = "none";
-document.getElementById("gameWon").style.display = "none";
-document.getElementById("gameLost").style.display = "none";
+document.getElementById("displaySection").innerHTML = `
+  <div class="play start-game" id="displayPlay">
+    <button onclick="chooseMode()">Play</button>
+  </div>
+`;
 
 function chooseMode() {
   sndchs.play();
   sndchs.currentTime = 0;
   document.getElementById("spantypeWriter").style.opacity = "0";
-  document.getElementById("displayPlay").style.display = "none";
-  document.getElementById("gameMode").style.display = "block";
+  document.getElementById("displaySection").innerHTML = `
+    <div class="play game-mode" id="gameMode">
+      <button onclick="playGame('normal')">Normal</button>
+      <button onclick="playGame('endless'); startTimer()">Endless</button>
+      <button onclick="playGame('Multiplayer')">Multiplayer</button>
+    </div>
+  `;
 }
 
 function playGame(el) {
   document.getElementById("typeWriter").style.opacity = "0";
   sndchs.play();
   sndchs.currentTime = 0;
-  document.getElementById("gameMode").style.display = "none";
-  document.getElementById("displayGame").style.display = "block";
+  document.getElementById("displaySection").innerHTML = `
+  <div id="displayGame">
+    <div class="bollywood-title">
+      <h1>
+        <span id="11">B</span>
+        <span id="12">O</span>
+        <span id="13">L</span>
+        <span id="14">L</span>
+        <span id="15">Y</span>
+        <span id="16">W</span>
+        <span id="17">O</span>
+        <span id="18">O</span>
+        <span id="19">D</span>
+      </h1>                
+    </div>
+    <div class="displayMovie">
+      <h2 id="displayQuestion"></h2>
+    </div>
+    <div id="app" class="timer-area"></div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div id="virtualkeyboard">
+        <div class="panel-body">
+          <ul class="keyboard" id="listLetters">         
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+  keyboardFunc();
   if (el === "normal") {
     document.getElementById("app").style.display = "none";
   } else if (el === "endless") {
@@ -60,35 +95,22 @@ function checkLetter() {
   }
 }
 
-function gameComplete() {
-  if (count === 9) {
-    // if game is lost
-    document.getElementById("movieName").innerHTML = movieFromBackend;
-    document.getElementById("gameLost").style.display = "block";
-    document.getElementById("displayGame").style.display = "none";
-    document.getElementById("gameMode").style.display = "none";
-    document.getElementById("displayPlay").style.display = "none";
-    for (var i = 11; i < 20; i++) {
-      document.getElementById(String(i)).style.textDecoration = "none";
-    }
-    count = 0;
-  }
-  if (movieName.indexOf("_") === -1) {
-    // if game is won
-    document.getElementById("gameWon").style.display = "block";
-    document.getElementById("displayGame").style.display = "none";
-    document.getElementById("gameMode").style.display = "none";
-    document.getElementById("displayPlay").style.display = "none";
-    for (var i = 11; i < 20; i++) {
-      document.getElementById(String(i)).style.textDecoration = "none";
-    }
-    count = 0;
-  }
+function keyboardFunc() {
+  var newli;
+  keyboard.forEach(function (el) {
+    newli = document.createElement("li");
+    newli.setAttribute(`id`, `${el}`);
+    newli.setAttribute(`class`, `char`);
+    newli.innerHTML = `
+				<button onclick="checkGuess('${el}')">${el}</button></li>		
+			`;
+    document.getElementById("listLetters").appendChild(newli);
+  });
 }
 
 var testMovie;
 var hiddenAlpha = [];
-function testFunction(el) {
+function checkGuess(el) {
   sndbtn.play();
   sndbtn.currentTime = 0;
   if (movieFromBackend.indexOf(el) !== -1) {
@@ -136,13 +158,67 @@ function testFunction(el) {
   gameComplete();
 }
 
-function playAgain() {
-  document.getElementById("gameLost").style.display = "none";
-  document.getElementById("gameWon").style.display = "none";
-  hiddenAlpha.forEach(function (el) {
-    document.getElementById(el).style.visibility = "visible";
+function gameComplete() {
+  if (count === 9) {
+    // if game is lost
+    hiddenAlpha.forEach(function (el) {
+      document.getElementById(el).style.visibility = "visible";
+    });
+    hiddenAlpha = [];
+    for (var i = 11; i < 20; i++) {
+      document.getElementById(String(i)).style.textDecoration = "none";
+    }
+    count = 0;
+    document.getElementById("displaySection").innerHTML = `
+      <div id="displayResult">
+        <div id="gameLost" class="play game-mode game-result">
+          <button class="genrateMovie" onclick="playAgain()">Play Again?</button>
+          <h1>YOU LOSE!!</h1>
+          <h2>The Movie Name is <span id="movieName"></span></h2>                
+        </div>      
+      </div>
+    `;
+    document.getElementById("movieName").innerHTML = movieFromBackend;
+  }
+  if (movieName.indexOf("_") === -1) {
+    // if game is won
+    count = 0;
+    hiddenAlpha.forEach(function (el) {
+      document.getElementById(el).style.visibility = "visible";
+    });
+    for (var i = 11; i < 20; i++) {
+      document.getElementById(String(i)).style.textDecoration = "none";
+    }
+    document.getElementById("displaySection").innerHTML = `
+      <div id="displayResult">
+        <div id="gameWon" class="play game-mode game-result" >
+          <h1>YOU WON!!</h1>
+          </br>
+          <button class="genrateMovie" onclick="playAgain()" >Play Again?</button>
+        </div>
+      </div>
+    `;
+  }
+  genRandomMovieAjax();
+}
+
+function genRandomMovieAjax() {
+  $(".genrateMovie").click(function () {
+    $.ajax({
+      type: "GET",
+      url: "/regen_movie",
+      data: {},
+      dataType: "json",
+      success: function (data) {
+        console.log(data.question_text);
+        movieFromBackend = data.question_text;
+      },
+    });
   });
-  hiddenAlpha = [];
+}
+
+
+function playAgain() {
   movieName = "";
   chooseMode();
 }

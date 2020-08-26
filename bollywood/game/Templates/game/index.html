@@ -40,78 +40,10 @@
         </div>
 
         <div class="container" id="displaySection">
-            <div class="play start-game" id="displayPlay">
-                <button onclick="chooseMode()">Play</button>
-            </div>
-            <div class="play game-mode" id="gameMode">
-                <button onclick="playGame('normal')">Normal</button>
-                <button onclick="playGame('endless'); startTimer()">Endless</button>
-                <button onclick="playGame('Multiplayer')">Multiplayer</button>
-            </div>
-            <div id="displayGame">
-                <div class="bollywood-title">
-                  <h1>
-                    <span id="11">B</span>
-                    <span id="12">O</span>
-                    <span id="13">L</span>
-                    <span id="14">L</span>
-                    <span id="15">Y</span>
-                    <span id="16">W</span>
-                    <span id="17">O</span>
-                    <span id="18">O</span>
-                    <span id="19">D</span>
-                  </h1>                
-                </div>
-                <div class="displayMovie">
-                    <h2 id="displayQuestion"></h2>
-                </div>
-                <div id="app" class="timer-area"></div>
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div id="virtualkeyboard">
-                        <div class="panel-body">
-                            <ul class="keyboard">         
-                                {% for letter in keyboard %}
-                                <li class="char" id="{{ letter }}"><button onclick="testFunction('{{ letter }}')">{{ letter }}</button></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="displayResult">
-                <div id="gameWon" class="play game-mode" >
-                    <h1>YOU WON!!</h1>
-                </br>
-                    <button class="genrateMovie" onclick="playAgain()" >Play Again?</button>
-                    {% comment %} <a class="genrateMovie" href="#">Play Again?</a> {% endcomment %}
-                </div>
-                <div id="gameLost" class="play game-mode">
-                    <button class="genrateMovie" onclick="playAgain()">Play Again?</button>
-                    <h1>YOU LOSE!!</h1>
-                    <h1>The Movie Name is <span id="movieName"></span></h1>
-                
-                </div>
-            </div>
+            {% comment %} Dynamic Injection {% endcomment %}
         </div>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $('.genrateMovie').click(function(){
-        $.ajax(
-        {
-            type:"GET",
-            url: "/regen_movie",
-            data:{
-            },
-            dataType: 'json',
-            success: function( data ) 
-            {
-                console.log(data.question_text)
-                movieFromBackend = data.question_text;
-            }
-        })
-    });
-    </script>
     <script rel="stylesheet" type="text/javascript">
             console.log("{{ random_movie }}");
             var movieFromBackend = "{{ random_movie }}";
