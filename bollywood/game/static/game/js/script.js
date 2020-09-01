@@ -15,6 +15,7 @@ String.prototype.replaceAt = function (index, replacement) {
     this.substr(index + replacement.length)
   );
 };
+// document.getElementById("bg-timer").style.display = "none";
 
 document.getElementById("displaySection").innerHTML = `
   <div class="play start-game" id="displayPlay">
@@ -30,7 +31,7 @@ function chooseMode() {
     <div class="play game-mode" id="gameMode">
       <button onclick="playGame('normal')">Normal</button>
       <button onclick="playGame('endless'); startTimer()">Endless</button>
-      <button onclick="playGame('Multiplayer')">Multiplayer</button>
+      <button onclick="playGame('Hollywood')">Hollywood</button>
     </div>
   `;
 }
@@ -68,14 +69,18 @@ function playGame(el) {
     </div>
   </div>
   `;
-  keyboardFunc();
   if (el === "normal") {
     document.getElementById("app").style.display = "none";
+    document.getElementById("11").innerHTML='B';
   } else if (el === "endless") {
     //Logic for endless
+    // document.getElementById("bg-timer").style.display = "block";
+    // move();
   } else {
-    //Logic for Multiplayer
+    //Logic for hollywood
+    document.getElementById("11").innerHTML='H';
   }
+  keyboardFunc();
   checkLetter();
   document.getElementById("displayQuestion").innerHTML = movieName;
 }
@@ -291,3 +296,24 @@ function init() {
   new TypeWriter(txtElement, words, wait);
 }
 //-------------------------------------TYPE END-----------------------------------------------
+
+//-------------Timer--------------------------------
+
+var timerIndex = 0;
+function move() {
+  if (timerIndex == 0) {
+    timerIndex = 1;
+    var elem = document.getElementById("bg-timer");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        timerIndex = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}

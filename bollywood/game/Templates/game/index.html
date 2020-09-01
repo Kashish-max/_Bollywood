@@ -17,6 +17,19 @@
   </head>
 
 <body>            
+    	<!--CSS Spinner-->
+    <div id="wrapper">
+        <div class="loader">
+            <div class="loader__bar"></div>
+            <div class="loader__bar loader__bar--delay-1"></div>
+            <div class="loader__bar loader__bar--delay-2"></div>
+            <div class="loader__bar loader__bar--delay-3"></div>
+            <div class="loader__bar loader__bar--delay-4"></div>
+            <div class="loader__bar loader__bar--delay-5"></div>
+        </div>
+	</div>
+    <!--  -->
+    <!-- <div id="bg-timer"></div> -->
 
     <section class="main-section">
         {% comment %} Type {% endcomment %}
@@ -27,7 +40,6 @@
             <h2>Welcome To BTown!</h2>
         </div>
         {% comment %} Type_end {% endcomment %}
-
         <div class="animation-area">
             <ul class="box-area">
                 <li></li>
@@ -38,7 +50,6 @@
                 <li></li>
             </ul>
         </div>
-
         <div class="container" id="displaySection">
             {% comment %} Dynamic Injection {% endcomment %}
         </div>
@@ -48,6 +59,15 @@
             console.log("{{ random_movie }}");
             var movieFromBackend = "{{ random_movie }}";
     </script>
+    <script>
+$(function () {
+	let bodyElement = $(`body`);
+	$('#wrapper').fadeOut(2500, function () {
+		$('#wrapper').remove();
+	});
+});
+        </script>
+    
     <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>  
 </body>
 </html>
