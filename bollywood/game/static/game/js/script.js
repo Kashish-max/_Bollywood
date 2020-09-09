@@ -1,5 +1,36 @@
 var vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
-var keyboard = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z",];
+var keyboard = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "b",
+  "c",
+  "d",
+  "f",
+  "g",
+  "h",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 var movieName = "";
 var count = 0;
 var sndbtn = new Audio(
@@ -28,12 +59,28 @@ function chooseMode() {
   sndchs.currentTime = 0;
   document.getElementById("spantypeWriter").style.opacity = "0";
   document.getElementById("displaySection").innerHTML = `
-    <div class="play game-mode" id="gameMode">
+  <div class="play game-mode" id="gameMode">
       <button onclick="playGame('normal')">Normal</button>
       <button onclick="playGame('endless'); startTimer()">Endless</button>
       <button onclick="playGame('Hollywood')">Hollywood</button>
     </div>
   `;
+}
+
+function textWrapBollywood() {
+  var textWrapper = document.querySelector(".ml9 .letters");
+  textWrapper.innerHTML = textWrapper.textContent.replace(
+    /\S/g,
+    "<span class='letter'>$&</span>"
+  );
+  anime.timeline({ loop: false }).add({
+    targets: ".ml9 .letter",
+    scale: [0, 1],
+    duration: 1500,
+    elasticity: 600,
+    id: (el, i) => 11 + i,
+    delay: (el, i) => 45 * (i + 1),
+  });
 }
 
 function playGame(el) {
@@ -43,16 +90,18 @@ function playGame(el) {
   document.getElementById("displaySection").innerHTML = `
   <div id="displayGame">
     <div class="bollywood-title">
-      <h1>
-        <span id="11">B</span>
-        <span id="12">O</span>
-        <span id="13">L</span>
-        <span id="14">L</span>
-        <span id="15">Y</span>
-        <span id="16">W</span>
-        <span id="17">O</span>
-        <span id="18">O</span>
-        <span id="19">D</span>
+      <h1 class="ml9">
+        <span class="letters">
+          <span id="11">B</span>
+          <span id="12">O</span>
+          <span id="13">L</span>
+          <span id="14">L</span>
+          <span id="15">Y</span>
+          <span id="16">W</span>
+          <span id="17">O</span>
+          <span id="18">O</span>
+          <span id="19">D</span>
+        </span>
       </h1>                
     </div>
     <div class="displayMovie">
@@ -71,15 +120,16 @@ function playGame(el) {
   `;
   if (el === "normal") {
     document.getElementById("app").style.display = "none";
-    document.getElementById("11").innerHTML='B';
+    document.getElementById("11").innerHTML = "B";
   } else if (el === "endless") {
     //Logic for endless
     // document.getElementById("bg-timer").style.display = "block";
     // move();
   } else {
     //Logic for hollywood
-    document.getElementById("11").innerHTML='H';
+    document.getElementById("11").innerHTML = "H";
   }
+  textWrapBollywood();
   keyboardFunc();
   checkLetter();
   document.getElementById("displayQuestion").innerHTML = movieName;
@@ -221,7 +271,6 @@ function genRandomMovieAjax() {
     });
   });
 }
-
 
 function playAgain() {
   movieName = "";
