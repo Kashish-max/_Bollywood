@@ -2,6 +2,7 @@ var vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
 var keyboard = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z",];
 var movieName = "";
 var count = 0;
+var toggleLeaderboard = true;
 var sndbtn = new Audio(
   "https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"
 );
@@ -26,7 +27,7 @@ document.getElementById("displaySection").innerHTML = `
 function chooseMode() {
   sndchs.play();
   sndchs.currentTime = 0;
-  document.getElementById("spantypeWriter").style.opacity = "0";
+  document.getElementById("typeWriter").style.display = "none";
   document.getElementById("displaySection").innerHTML = `
     <div class="play game-mode" id="gameMode">
       <button onclick="playGame('normal')">Normal</button>
@@ -37,7 +38,7 @@ function chooseMode() {
 }
 
 function playGame(el) {
-  document.getElementById("typeWriter").style.opacity = "0";
+  document.getElementById("typeWriter").style.display = "none";
   sndchs.play();
   sndchs.currentTime = 0;
   document.getElementById("displaySection").innerHTML = `
@@ -317,3 +318,120 @@ function move() {
     }
   }
 }
+
+//-----------------------Leaderboard----------------------------
+
+function showLeaderboard()
+{ 
+  document.getElementById("typeWriter").style.display = "none";
+  document.getElementById("displaySection").innerHTML =`<div id="leaderboard">
+  <div class="card">
+    <section class="card-info card-section">
+      
+      <div class="avatar row">
+      </div>
+      
+      <section class="user row">
+        <h1 class="user-header">
+          Me
+        </h1>
+      </section>
+      
+      <section class="statistics">	
+        <article class="statistic">
+          <h4 class="statistic-title">
+            Score
+          </h4>
+          <h3 class="statistic-value">
+            1,034
+          </h3>
+        </article>
+      </section>
+      
+      <div class="dial">
+        <h2 class="dial-title">
+          35
+        </h2>
+        <h3 class="dial-value">
+          Rank
+        </h3>
+      </div>
+    </section>
+    <section class="card-details card-section">
+      
+      <nav class="menu">
+        <article class="menu-item menu-item-active">
+          Leaderboard
+        </article>
+      </nav>
+      
+      <dl class="leaderboard">
+        <dt>
+          <article class="progress">
+            <section class="progress-bar" style="width: 85%;"></section>
+          </article>
+        </dt>
+        <dd>
+          <div class="leaderboard-name">Bryan Smith</div>
+          <div class="leaderboard-value">20.123</div>
+        </dd>
+        <dt>
+          <article class="progress">
+            <section class="progress-bar" style="width: 65%;"></section>
+          </article>
+        </dt>
+        <dd>
+          <div class="leaderboard-name">Kevin Johnson</div>
+          <div class="leaderboard-value">16.354</div>
+        </dd>
+        <dt>
+          <article class="progress">
+            <section class="progress-bar" style="width: 60%;"></section>
+          </article>
+        </dt>
+        <dd>
+          <div class="leaderboard-name">Glen Howie</div>
+          <div class="leaderboard-value">15.873</div>
+        </dd>
+        <dt>
+          <article class="progress">
+            <section class="progress-bar" style="width: 55%;"></section>
+          </article>
+        </dt>
+        <dd>
+          <div class="leaderboard-name">Mark Desa</div>
+          <div class="leaderboard-value">12.230</div>
+        </dd>
+        <dt>
+          <article class="progress">
+            <section class="progress-bar" style="width: 35%;"></section>
+          </article>
+        </dt>
+        <dd>
+          <div class="leaderboard-name">Martin Geiger</div>
+          <div class="leaderboard-value">10.235</div>
+        </dd>
+      </dl>
+    </section>
+  </div>
+  </div>
+  `
+}
+
+//----------------Home Screen------------------------
+
+function showHome()
+{
+  movieName = "";
+  genRandomMovieAjax();
+
+  document.getElementById("typeWriter").style.display = "block";
+  document.getElementById("displaySection").innerHTML = `
+  <div class="play start-game" id="displayPlay">
+    <button onclick="chooseMode()">Play</button>
+  </div>
+`;
+}
+
+//-------------------Hamburger-------------------------
+
