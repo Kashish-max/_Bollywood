@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href={% static 'game/css/style.css' %}> 
 
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
     <title>Bollywood</title>
   </head>
@@ -33,12 +34,6 @@
 
     <section class="main-section">
         {% comment %} Type {% endcomment %}
-        <div class="type-area" id="typeWriter">
-            <h1>
-            <span id="spantypeWriter" class="txt-type" data-wait="3000" data-words='["One Stop destination for movie lovers", "Guess the guess out of movie name"]'></span>
-            </h1>
-            <h2>Welcome To BTown!</h2>
-        </div>
         {% comment %} Type_end {% endcomment %}
         <div class="animation-area">
             <ul class="box-area">
@@ -49,24 +44,68 @@
                 <li></li>
                 <li></li>
             </ul>
-        </div>        
-        <div class="container" id="displaySection">
-            {% comment %} Dynamic Injection {% endcomment %}
         </div>
+
+        <!-- Side Navigation -->
+        <div id="side-wrapper">
+          <!-- Sidebar -->
+          <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+              <li class="trophy"><a href="#" onclick="showLeaderboard()"><h4>Leaderboards</h4></a></li>
+              <li class="home"><a href="#" class="genrateMovie" onclick="showHome()"><h4>Home</h4></a></li>
+            </ul>
+          </div>
+          
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <a href="#" class="btn" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+
+                  <div class="type-area" id="typeWriter">
+                    <h1>
+                    <span id="spantypeWriter" class="txt-type" data-wait="3000" data-words='["One Stop Destination For Movie Lovers", "Guess The Guess Out Of Movie Name"]'></span>
+                    </h1>
+                    <h2>Welcome To BTown!</h2>
+                </div>
+
+                <div class="container" id="displaySection">
+                  {% comment %} Dynamic Injection {% endcomment %}
+              </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script rel="stylesheet" type="text/javascript">
             console.log("{{ random_movie }}");
             var movieFromBackend = "{{ random_movie }}";
     </script>
-    <script>
-        $(function () {
-            let bodyElement = $(`body`);
-            $('#wrapper').fadeOut(2500, function () {
-                $('#wrapper').remove();
-            });
+
+       <script>
+          $(document).ready(function(){
+        $("#menu-toggle").click(function(e){
+        e.preventDefault();
+        $("#side-wrapper").toggleClass("menuDisplayed");
         });
-    </script>
+        });
+
+      </script>
+
+      <script>
+        $(function () {
+          let bodyElement = $(`body`);
+          $('#wrapper').fadeOut(2500, function () {
+            $('#wrapper').remove();
+          });
+        });
+       </script>
+
     
     <script rel="stylesheet" type="text/javascript" src={% static 'game/js/script.js' %}> </script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
