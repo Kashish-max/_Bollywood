@@ -54,6 +54,7 @@ document.getElementById("displaySection").innerHTML = `
     <button onclick="chooseMode()">Play</button>
   </div>
 `;
+document.getElementById("fill-timer").style.display = "none";
 
 function chooseMode() {
   sndchs.play();
@@ -88,6 +89,7 @@ function playGame(el) {
   document.getElementById("typeWriter").style.display = "none";
   sndchs.play();
   sndchs.currentTime = 0;
+  gameTimer();
   document.getElementById("displaySection").innerHTML = `
   <div id="displayGame">
     <div class="bollywood-title">
@@ -123,9 +125,7 @@ function playGame(el) {
     document.getElementById("app").style.display = "none";
     document.getElementById("11").innerHTML = "B";
   } else if (el === "endless") {
-    //Logic for endless
-    // document.getElementById("bg-timer").style.display = "block";
-    // move();
+    document.getElementById("fill-timer").style.display = "block";
   } else {
     //Logic for hollywood
     document.getElementById("11").innerHTML = "H";
@@ -134,6 +134,23 @@ function playGame(el) {
   keyboardFunc();
   checkLetter();
   document.getElementById("displayQuestion").innerHTML = movieName;
+}
+
+function gameTimer() {
+  var cnt = document.getElementById("count");
+  var water = document.getElementById("water");
+  var percent = cnt.innerText;
+  var interval;
+  interval = setInterval(function () {
+    percent++;
+    cnt.innerHTML = percent;
+    water.style.transform = "translate(0" + "," + (100 - percent) + "%)";
+    if (percent == 100) {
+      clearInterval(interval);
+      count = 9;
+      gameComplete();
+    }
+  }, 600); //60 seconds
 }
 
 function checkLetter() {
@@ -370,10 +387,9 @@ function move() {
 
 //-----------------------Leaderboard----------------------------
 
-function showLeaderboard()
-{ 
+function showLeaderboard() {
   document.getElementById("typeWriter").style.display = "none";
-  document.getElementById("displaySection").innerHTML =`<div id="leaderboard">
+  document.getElementById("displaySection").innerHTML = `<div id="leaderboard">
   <div class="card">
     <section class="card-info card-section">
       
@@ -464,13 +480,12 @@ function showLeaderboard()
     </section>
   </div>
   </div>
-  `
+  `;
 }
 
 //----------------Home Screen------------------------
 
-function showHome()
-{
+function showHome() {
   movieName = "";
   genRandomMovieAjax();
 
@@ -483,4 +498,3 @@ function showHome()
 }
 
 //-------------------Hamburger-------------------------
-
