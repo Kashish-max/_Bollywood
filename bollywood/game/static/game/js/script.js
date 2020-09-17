@@ -89,7 +89,6 @@ function playGame(el) {
   document.getElementById("typeWriter").style.display = "none";
   sndchs.play();
   sndchs.currentTime = 0;
-  gameTimer();
   document.getElementById("displaySection").innerHTML = `
   <div id="displayGame">
     <div class="bollywood-title">
@@ -121,23 +120,24 @@ function playGame(el) {
     </div>
   </div>
   `;
+  textWrapBollywood();
   if (el === "normal") {
     document.getElementById("app").style.display = "none";
     document.getElementById("11").innerHTML = "B";
   } else if (el === "endless") {
     document.getElementById("fill-timer").style.display = "block";
+    gameTimer();
   } else {
     //Logic for hollywood
     document.getElementById("11").innerHTML = "H";
   }
-  textWrapBollywood();
   keyboardFunc();
   checkLetter();
   document.getElementById("displayQuestion").innerHTML = movieName;
 }
 
 function gameTimer() {
-  var cnt = document.getElementById("count");
+  var cnt = document.getElementById("countTime");
   var water = document.getElementById("water");
   var percent = cnt.innerText;
   var interval;

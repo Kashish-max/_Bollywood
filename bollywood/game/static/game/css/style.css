@@ -815,7 +815,7 @@ li.home:before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* background: #020438; */
+  background: #020438;
   overflow: hidden;
 }
 
@@ -854,15 +854,16 @@ li.home:before {
 
 .box .water_wave_back {
   right: 0;
-  fill: #c7eeff;
-  animation: wave-back 1.4s infinite linear;
+  /* fill: #c7eeff; */
+  fill: #d8f3ff;
+  animation: wave-back 2.4s infinite linear;
 }
 
 .box .water_wave_front {
   left: 0;
   fill: #4d6de3;
   margin-bottom: -1px;
-  animation: wave-front 0.7s infinite linear;
+  animation: wave-front 1.7s infinite linear;
 }
 
 @keyframes wave-front {
