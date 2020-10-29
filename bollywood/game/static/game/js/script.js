@@ -31,8 +31,6 @@ var keyboard = [
   "y",
   "z",
 ];
-var testMovie;
-var hiddenAlpha = [];
 var movieName = "";
 var count = 0;
 var toggleLeaderboard = true;
@@ -41,8 +39,6 @@ var sndbtn = new Audio(
 );
 
 var sndchs = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
-var score ;
-var mode ;
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -67,27 +63,27 @@ function chooseMode() {
   document.getElementById("displaySection").innerHTML = `
   <div class="play game-mode" id="gameMode">
       <button onclick="playGame('normal')">Normal</button>
-      <button onclick="playGame('endless')">Endless</button>
+      <button onclick="playGame('endless'); startTimer()">Endless</button>
       <button onclick="playGame('Hollywood')">Hollywood</button>
     </div>
   `;
 }
 
-// function textWrapBollywood() {
-//   var textWrapper = document.querySelector(".ml9 .letters");
-//   textWrapper.innerHTML = textWrapper.textContent.replace(
-//     /\S/g,
-//     "<span class='letter'>$&</span>"
-//   );
-//   anime.timeline({ loop: false }).add({
-//     targets: ".ml9 .letter",
-//     scale: [0, 1],
-//     duration: 1500,
-//     elasticity: 600,
-//     id: (el, i) => 11 + i,
-//     delay: (el, i) => 45 * (i + 1),
-//   });
-// }
+function textWrapBollywood() {
+  var textWrapper = document.querySelector(".ml9 .letters");
+  textWrapper.innerHTML = textWrapper.textContent.replace(
+    /\S/g,
+    "<span class='letter'>$&</span>"
+  );
+  anime.timeline({ loop: false }).add({
+    targets: ".ml9 .letter",
+    scale: [0, 1],
+    duration: 1500,
+    elasticity: 600,
+    id: (el, i) => 11 + i,
+    delay: (el, i) => 45 * (i + 1),
+  });
+}
 
 function playGame(el) {
   document.getElementById("typeWriter").style.display = "none";
@@ -124,50 +120,38 @@ function playGame(el) {
     </div>
   </div>
   `;
+  textWrapBollywood();
   if (el === "normal") {
-    mode='n';
     document.getElementById("app").style.display = "none";
     document.getElementById("11").innerHTML = "B";
-    keyboardFunc();
-    checkLetter();
-    document.getElementById("displayQuestion").innerHTML = movieName;
-  } 
-  
-  else if (el === "endless") {
-    // gameTimer();
-    mode='e';
+  } else if (el === "endless") {
     document.getElementById("fill-timer").style.display = "block";
-    nextMovie();
-  } 
-  
-  else {
+    gameTimer();
+  } else {
     //Logic for hollywood
-    mode='n';
     document.getElementById("11").innerHTML = "H";
-    keyboardFunc();
-    checkLetter();
-    document.getElementById("displayQuestion").innerHTML = movieName;
   }
-  // textWrapBollywood();
- 
+  keyboardFunc();
+  checkLetter();
+  document.getElementById("displayQuestion").innerHTML = movieName;
 }
 
-// function gameTimer() {
-//   var cnt = document.getElementById("count");
-//   var water = document.getElementById("water");
-//   var percent = cnt.innerText;
-//   var interval;
-//   interval = setInterval(function () {
-//     percent++;
-//     cnt.innerHTML = percent;
-//     water.style.transform = "translate(0" + "," + (100 - percent) + "%)";
-//     if (percent == 100) {
-//       clearInterval(interval);
-//       count = 9;
-//       gameComplete();
-//     }
-//   }, 600); //60 seconds
-// }
+function gameTimer() {
+  var cnt = document.getElementById("countTime");
+  var water = document.getElementById("water");
+  var percent = cnt.innerText;
+  var interval;
+  interval = setInterval(function () {
+    percent++;
+    cnt.innerHTML = percent;
+    water.style.transform = "translate(0" + "," + (100 - percent) + "%)";
+    if (percent == 100) {
+      clearInterval(interval);
+      count = 9;
+      gameComplete();
+    }
+  }, 600); //60 seconds
+}
 
 function checkLetter() {
   for (var j = 0; j < movieFromBackend.length; j++) {
@@ -197,7 +181,8 @@ function keyboardFunc() {
   });
 }
 
-
+var testMovie;
+var hiddenAlpha = [];
 function checkGuess(el) {
   sndbtn.play();
   sndbtn.currentTime = 0;
@@ -268,7 +253,7 @@ function gameComplete() {
     `;
     document.getElementById("movieName").innerHTML = movieFromBackend;
   }
-  if (movieName.indexOf("_") === -1  && mode === 'n') {
+  if (movieName.indexOf("_") === -1) {
     // if game is won
     count = 0;
     hiddenAlpha.forEach(function (el) {
@@ -282,28 +267,11 @@ function gameComplete() {
         <div id="gameWon" class="play game-mode game-result" >
           <h1>YOU WON!!</h1>
           </br>
-          <button class="genrateMovie" onclick="playAgain()">Play Again?</button>
+          <button class="genrateMovie" onclick="playAgain()" >Play Again?</button>
         </div>
       </div>
     `;
   }
-
-  if (movieName.indexOf("_") === -1  && mode === 'e') {
-    // if game is in endless mode
-    hiddenAlpha.forEach(function (el) {
-      document.getElementById(el).style.visibility = "visible";
-    });
-    
-    document.getElementById("displaySection").innerHTML = `
-      <div id="displayResult">
-        <div id="gameWon" class="play game-mode game-result" >
-          </br>
-          <button class="genrateMovie" onclick="nextMovie()">Next Movie</button>
-        </div>
-      </div>
-    `;
-  }
-  
   genRandomMovieAjax();
 }
 
@@ -396,6 +364,26 @@ function init() {
 }
 //-------------------------------------TYPE END-----------------------------------------------
 
+//-------------Timer--------------------------------
+
+var timerIndex = 0;
+function move() {
+  if (timerIndex == 0) {
+    timerIndex = 1;
+    var elem = document.getElementById("bg-timer");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        timerIndex = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
 
 //-----------------------Leaderboard----------------------------
 
@@ -509,56 +497,4 @@ function showHome() {
 `;
 }
 
-//-------------------Endless Mode------------------------
-
-function nextMovie(){
-  movieName = "";
-
-  document.getElementById("typeWriter").style.display = "none";
-  sndchs.play();
-  sndchs.currentTime = 0;
-
-
-  document.getElementById("displaySection").innerHTML = `
-  <div id="displayGame">
-    <div class="bollywood-title">
-      <h1 class="ml9">
-        <span class="letters">
-          <span id="11">B</span>
-          <span id="12">O</span>
-          <span id="13">L</span>
-          <span id="14">L</span>
-          <span id="15">Y</span>
-          <span id="16">W</span>
-          <span id="17">O</span>
-          <span id="18">O</span>
-          <span id="19">D</span>
-        </span>
-      </h1>                
-    </div>
-    <div class="displayMovie">
-      <h2 id="displayQuestion"></h2>
-    </div>
-    <div id="app" class="timer-area"></div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <div id="virtualkeyboard">
-        <div class="panel-body">
-          <ul class="keyboard" id="listLetters">         
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  `;
-  
-  console.log(movieFromBackend);
-  console.log(movieName); 
-
-  keyboardFunc();
-  checkLetter();
-
-  console.log(movieFromBackend);
-  console.log(movieName);
-   
-  document.getElementById("displayQuestion").innerHTML = movieName;
-}
+//-------------------Hamburger-------------------------
