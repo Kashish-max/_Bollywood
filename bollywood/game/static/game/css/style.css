@@ -12,6 +12,7 @@ body {
   font-family: "Play", sans-serif;
   color: #fff;
   overflow: hidden !important;
+ 
 }
 
 * {
@@ -439,72 +440,87 @@ body {
 
 /* SideBar */
 
-#sidebar-wrapper {
-  z-index: 1;
-  position: absolute;
-  width: 0;
-  height: 100%;
-  overflow-y: hidden;
-  background: #caf0f8;
-  opacity: 0.9;
-  transition: all .5s;
-  display: flex;
+.nav__cont {
+  position: fixed;
+  width: 60px;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+  background-color: #202020;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  cursor: pointer;
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
 }
-
-/* Main Content */
-
-#page-content-wrapper {
-  width: 100%;
-  position: absolute;
-  padding: 15px;
-  transition: all .5s;
+.nav__cont:hover {
+  width: 230px;
 }
-
-#menu-toggle {
-  transition: all .3s;
-  font-size: 2em;
+@media screen and (min-width: 600px) {
+  .nav__cont {
+    width: 80px;
+ }
 }
-
-/* Change the width of the sidebar to display it*/
-
-#side-wrapper.menuDisplayed #sidebar-wrapper {
-  width: 250px;
+.nav {
+  list-style-type: none;
+  color: white;
 }
-
-#side-wrapper.menuDisplayed #page-content-wrapper {
-  padding-left: 250px;
+.nav:first-child {
+  padding-top: 1.5rem;
 }
+.nav__items {
+  padding-bottom: 4rem;
+  font-family: 'roboto';
+  margin-left: 40px;
 
-/* Sidebar styling */
-
-.sidebar-nav {
-  padding: 0;
-  list-style: none;
-  transition: all .5s;
-  width: 100%;
-  text-align: center;
 }
-
-.sidebar-nav li {
-  line-height: 40px;
-  width: 100%;
-  transition: all .3s;
-  padding: 10px;
-}
-
-.sidebar-nav li a {
+.nav__items a {
+  position: relative;
   display: block;
+  top: -35px;
+  padding-left: 25px;
+  padding-right: 15px;
+  transition: all 0.3s ease;
+  margin-left: 25px;
+  margin-right: 10px;
   text-decoration: none;
-  color: #000;
+  color: white;
+  font-family: 'roboto';
+  font-weight: 100;
+  font-size: 1.35em;
+}
+.nav__items a:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  background: radial-gradient(circle at 94.02% 88.03%, #54a4ff, transparent 100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: -10;
+}
+.nav__items:hover a:after {
+  opacity: 1;
+}
+.nav__items svg {
+  width: 26px;
+  height: 26px;
+  position: relative;
+  left: -25px;
+  cursor: pointer;
+}
+@media screen and (min-width: 600px) {
+  .nav__items svg {
+    width: 32px;
+    height: 32px;
+    left: -15px;
+ }
 }
 
-.sidebar-nav li:hover {
-  background: #001524;
-}
 
-.sidebar-nav h4:hover {
-  color: #fff;
-}
+
 
 /* Leaderboard */
 
@@ -713,36 +729,6 @@ h2.sub.header {
   font-weight: 700;
 }
 
-/* Bullet Points */
-
-ul {
-  list-style: none;
-  padding-left: 1em;
-}
-
-li.trophy:before {
-  content: '';
-  display: inline-block;
-  height: 2em;
-  width: 2em;
-  background-image: url(http://placehold.it/32?text=fallback);
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Circle-icons-trophy.svg/200px-Circle-icons-trophy.svg.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 0.5em;
-}
-
-li.home:before {
-  content: '';
-  display: inline-block;
-  height: 2em;
-  width: 2em;
-  background-image: url(http://placehold.it/32?text=fallback);
-  background-image: url(https://icons.iconarchive.com/icons/fps.hu/free-christmas-flat-circle/512/home-icon.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 0.5em;
-}
 
 /* Hamburger Icon */
 
@@ -819,7 +805,7 @@ li.home:before {
   overflow: hidden;
 }
 
-.box .percent {
+/* .box .percent {
   position: absolute;
   left: 0;
   top: 0;
@@ -875,4 +861,6 @@ li.home:before {
   100% {
     transform: translate(50%, 0);
   }
-}
+} */
+
+/* Endless Mode */
